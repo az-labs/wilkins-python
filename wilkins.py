@@ -1,17 +1,23 @@
 #!/usr/bin/env python
 
+import httplib
+
 class Wilkins:
     """This class allows you to query words on WordNet's internet UI."""
-    i = 12345
+    wn_request = None
+    result = None
 
     def __init__(self):
-        print "This is the constructor!!"
+        self.wn_request = httplib.HTTPConnection("www.python.org")
+        result = dict()
 
-    def f(self):
-        return 'hello world'
+    def query_word(self, word):
+        print word
+        self.wn_request.request("HEAD", "/index.html")
+        wn_response = self.wn_request.getresponse()
+        print wn_response.status, wn_response.reason
 
 
 if __name__ == "__main__":
     x = Wilkins()
-    print x.i
-    print x.f()
+    print x.query_word("idiot")
