@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
 import requests
-import tempfile
+from bs4 import BeautifulSoup
 from urllib import urlencode
-from xml.dom import minidom
 
 class Wilkins:
     """This class allows you to query words on WordNet's internet UI."""
@@ -21,12 +20,7 @@ class Wilkins:
         self.parameters = { "s" : word, "o0" : "", "o1" : "" }
         wn_uri = "%s?%s" % (self.wn_request, urlencode(self.parameters))
         wn_html_result = requests.get(wn_uri)
-        temp_response = tempfile.NamedTemporaryFile()
-        temp_response.write(wn_html_result.text.encode("ascii"))
-        print temp_response.name
-        html_response = minidom.parse(temp_response.name)
-        html_body = html_response.getElementsByTagName("body")
-        print html_response
+        soup = BeautifulSoup(wn_html_result.text.encode("ascii"), 'html.parser')
 
 
 if __name__ == "__main__":
