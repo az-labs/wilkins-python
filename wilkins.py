@@ -3,6 +3,8 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib import urlencode
+import argparse
+import json
 
 class Wilkins:
     """This class allows you to query words on WordNet's internet UI."""
@@ -36,5 +38,25 @@ class Wilkins:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Query the online WordNet endpoint.")
+    parser.add_argument('--word', metavar='w', type=str, help='The word about which you would like to query WordNet.')
+    parser.add_argument('--output', metavar='o', type=str, help='The output format you would prefer: [json]')
+
+    args = vars(parser.parse_args())
+
+    word = ""
+    output = ""
+
+    if not args["word"]:
+        pass
+    if not args["output"]:
+        output = "json"
+    else:
+        output = args["output"]
+
+    word = args["word"]
+
     x = Wilkins()
-    print x.query_word("blurry")
+    result = x.query_word(word)
+    if output == "json":
+        print json.dumps(result)
