@@ -27,8 +27,12 @@ class Wilkins:
         del synonyms[0]
         # Remove the second entry as it's just the word type which we already have:
         del synonyms[0]
+        self.result["synonyms"] = []
+        self.result["residual"] = []
         for synonym in synonyms:
-            print synonym.text
+            self.result["synonyms"].append(synonym.text.split('#')[0])
+            self.result["residual"].append(synonym.text.split('#')[1])
+        return self.result
 
 
 if __name__ == "__main__":
