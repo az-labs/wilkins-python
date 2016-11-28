@@ -9,7 +9,7 @@ class TestWilkins(unittest.TestCase):
 
     def test_cliusage(self):
         expected_result = '{'
-        expected_result += '"synonyms": ["stay bla", "rest"], '
+        expected_result += '"synonyms": ["stay", "rest"], '
         expected_result += '"type": "Verb", '
         expected_result += '"residual": ["1 (stay%2:30:00::)", '
         expected_result += '"6 (rest%2:30:00::)"]}'
